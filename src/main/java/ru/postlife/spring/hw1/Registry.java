@@ -1,4 +1,4 @@
-package hw1;
+package ru.postlife.spring.hw1;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
