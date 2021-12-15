@@ -1,4 +1,4 @@
-package hw1;
+package ru.postlife.spring.hw1;
 
 public enum Doctor {
     Dentist(1, "Dentist"),
