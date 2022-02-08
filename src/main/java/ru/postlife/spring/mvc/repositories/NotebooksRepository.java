@@ -3,7 +3,6 @@ package ru.postlife.spring.mvc.repositories;
 import org.springframework.stereotype.Component;
 import ru.postlife.spring.mvc.entites.Brand;
 import ru.postlife.spring.mvc.entites.Notebook;
-import ru.postlife.spring.mvc.entites.Student;
 
 import java.util.ArrayList;
 import java.util.List;
