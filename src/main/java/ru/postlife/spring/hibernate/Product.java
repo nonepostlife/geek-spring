@@ -1,5 +1,6 @@
 package ru.postlife.spring.hibernate;
 
+import javax.management.remote.rmi._RMIConnection_Stub;
 import javax.persistence.*;
 
 @Entity
@@ -54,6 +55,15 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product [" + id + ", " + title + ", " + price + " руб., " + category_id.getTitle() + "]";
+        StringBuilder sb = new StringBuilder();
+        Category parent = category_id.getParent_category_id();
+        Category sub = category_id;
+        while (parent != null) {
+            sb.append(sub.getTitle()).append(" <-");
+            sub = parent;
+            parent = parent.getParent_category_id();
+        }
+        sb.append(" ").append(sub.getTitle());
+        return "Product [" + id + ", " + title + ", " + price + " руб., " + sb + "]";
     }
 }

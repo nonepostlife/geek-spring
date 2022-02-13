@@ -17,6 +17,10 @@ public class Category {
     @OneToMany(mappedBy = "category_id")
     private List<Product> products;
 
+    @ManyToOne
+    @JoinColumn(name = "parent_category_id")
+    private Category parent_category_id;
+
     public int getId() {
         return id;
     }
@@ -41,12 +45,24 @@ public class Category {
         this.products = products;
     }
 
+    public Category getParent_category_id() {
+        return parent_category_id;
+    }
+
+    public void setParent_category_id(Category parent_category_id) {
+        this.parent_category_id = parent_category_id;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Product p : products) {
-            sb.append(p.getTitle()).append(" ");
+        for (int i = 0; i < products.size(); i++) {
+            if (i == products.size() - 1) {
+                sb.append(products.get(i).getTitle());
+                break;
+            }
+            sb.append(products.get(i).getTitle()).append(", ");
         }
-        return "Category [" + id + ", " + title + ", Продукты {" + sb + "}]";
+        return "Category [" + id + ", " + title + ", Продукты: " + sb + "]";
     }
 }
