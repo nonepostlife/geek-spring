@@ -8,6 +8,50 @@ import java.util.List;
 
 public class MainClass {
     public static void main(String[] args) {
+        hw();
+    }
+
+    public static void hw() {
+        SessionFactory factory = new Configuration()
+                .configure("hibernate.cfg.xml")
+                .addAnnotatedClass(Category.class)
+                .addAnnotatedClass(Product.class)
+                .buildSessionFactory();
+
+        Session session = factory.getCurrentSession();
+        try {
+            session.beginTransaction();
+
+            Product product = session.get(Product.class, 2L);
+            System.out.println(product);
+
+            Product product2 = session.get(Product.class, 5L);
+            System.out.println(product2);
+
+            Category category_groats = session.get(Category.class, 7);
+            System.out.println(category_groats);
+
+            Category category_fruit = session.get(Category.class, 9);
+            System.out.println(category_fruit);
+
+            Product newProduct = new Product();
+            newProduct.setTitle("Яблоки");
+            newProduct.setPrice(110);
+            newProduct.setCategory_id(category_fruit);
+            session.save(newProduct);
+            session.getTransaction().commit();
+
+            session = factory.getCurrentSession();
+            session.beginTransaction();
+            Category category_fruit2 = session.get(Category.class, 9);
+            System.out.println(category_fruit2);
+        } finally {
+            factory.close();
+            session.close();
+        }
+    }
+
+    public static void lesson() {
         SessionFactory factory = new Configuration()
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(Book.class)
@@ -17,7 +61,6 @@ public class MainClass {
         // CRUD
         Session session = null;
         session = factory.getCurrentSession();
-
 //////////////
 //        session.beginTransaction();
 //        Book book = session.get(Book.class, 1);
