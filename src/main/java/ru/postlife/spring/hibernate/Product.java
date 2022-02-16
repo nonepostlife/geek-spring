@@ -56,14 +56,16 @@ public class Product {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        Category parent = category_id.getParent_category_id();
-        Category sub = category_id;
-        while (parent != null) {
-            sb.append(sub.getTitle()).append(" <-");
-            sub = parent;
-            parent = parent.getParent_category_id();
+        if (category_id != null) {
+            Category parent = category_id.getParent_category_id();
+            Category sub = category_id;
+            while (parent != null) {
+                sb.append(sub.getTitle()).append(" <-");
+                sub = parent;
+                parent = parent.getParent_category_id();
+            }
+            sb.append(" ").append(sub.getTitle());
         }
-        sb.append(" ").append(sub.getTitle());
         return "Product [" + id + ", " + title + ", " + price + " руб., " + sb + "]";
     }
 }

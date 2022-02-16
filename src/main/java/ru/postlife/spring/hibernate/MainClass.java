@@ -8,7 +8,33 @@ import java.util.List;
 
 public class MainClass {
     public static void main(String[] args) {
-        hw();
+        ProductDao productDao = new ProductDao();
+        System.out.println(productDao.findById(1L));
+        System.out.println(productDao.findById(3L));
+        for (Product p : productDao.findAll()) {
+            System.out.println(p);
+        }
+
+        productDao.deleteById(4L);
+        for (Product p : productDao.findAll()) {
+            System.out.println(p);
+        }
+
+        Product addProduct = new Product();
+        addProduct.setTitle("Мандарин");
+        addProduct.setPrice(130);
+        productDao.saveOrUpdate(addProduct);
+        for (Product p : productDao.findAll()) {
+            System.out.println(p);
+        }
+
+        addProduct.setPrice(555);
+        productDao.saveOrUpdate(addProduct);
+        for (Product p : productDao.findAll()) {
+            System.out.println(p);
+        }
+
+        productDao.close();
     }
 
     public static void hw() {
