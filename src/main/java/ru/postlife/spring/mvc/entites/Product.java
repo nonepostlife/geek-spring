@@ -1,6 +1,5 @@
-package ru.postlife.spring.hibernate;
+package ru.postlife.spring.mvc.entites;
 
-import javax.management.remote.rmi._RMIConnection_Stub;
 import javax.persistence.*;
 
 @Entity
